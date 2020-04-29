@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+	<input type="text" name="peso">
+	<input type="text" name="altura">
+	<input type="submit" name="btn_submit" value="calcular">
+
+	<h1></h1>
+
+	<script type="text/javascript">
+		$("document").ready(function(){
+			$("btn_submit").click(function(){
+				var peso = parseFloar($("peso").val())
+				var altura = parseFloar($("altura").val())
+				$.ajax({
+					url: "http://ramown.pythonanywhere.com/api",
+					type: "POST",
+					contentType: "application/json",
+					data: JSON.stringify({"peso": peso, "altura": altura})
+				}).done(function(data) {
+					$("h1").html("IMC: "+data["resultado"])
+				})
+
+			})
+		})
+	</script>
+</body>
+</html>
